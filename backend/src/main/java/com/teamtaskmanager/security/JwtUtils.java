@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class JwtUtils {
@@ -26,8 +27,12 @@ public class JwtUtils {
                 .compact();
     }
 
+    // private Key getSigningKey() {
+    // return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+    // }
+
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+        return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String getEmailFromToken(String token) {
